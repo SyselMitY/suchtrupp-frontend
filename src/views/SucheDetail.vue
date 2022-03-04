@@ -80,7 +80,7 @@
           v-for="(suchtrupp, index) in suche.suchtruppList"
           :key="'addmeldung' + index"
           :style="`grid-row: ${index + 2};`"
-          @click="openAddMeldungModal(suchtrupp.id)"
+          @click="openAddMeldungModal(suchtrupp)"
         >
           <b-button variant="success">Neue Meldung</b-button>
         </div>
