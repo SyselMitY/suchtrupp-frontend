@@ -53,7 +53,7 @@
           @click="openSuchtruppModal(suchtrupp)"
         >
           <h4>
-            Suchtrupp {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersonen }}]
+            {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersonen }}]
           </h4>
         </div>
 
@@ -138,19 +138,9 @@
     </b-jumbotron>
 
     <b-modal id="meldung-modal">
-      <b-modal-header>
-        <h4>Meldung</h4>
-      </b-modal-header>
-      <b-modal-body>
         <p>Tags: {{ meldung.tags }}</p>
         <p>Zeitpunkt: {{ meldung.timestamp.toLocaleTimeString() }}</p>
         <p>{{ meldung.beschreibung }}</p>
-      </b-modal-body>
-      <b-modal-footer>
-        <b-button variant="primary" @click="closeMeldungModal()">
-          Schließen
-        </b-button>
-      </b-modal-footer>
     </b-modal>
 
 
@@ -280,8 +270,8 @@ export default {
       );
     },
     openMeldungModal(meldung) {
-      this.$bvModal.show("meldung-modal");
       this.meldung = meldung;
+      this.$bvModal.show("meldung-modal");
     },
     openAddMeldungModal(suchtrupp) {
       this.newMeldung.suchtrupp = suchtrupp.id;
