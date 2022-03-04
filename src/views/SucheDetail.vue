@@ -52,6 +52,7 @@
           v-for="(suchtrupp, index) in suche.suchtruppList"
           :key="'n' + index"
           :style="`grid-column: 1; grid-row: ${index + 2};`"
+          @click="openSuchtruppModal(suchtrupp)"
         >
           <h4>
             Suchtrupp {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersons }}]
@@ -144,7 +145,7 @@
       </b-modal-header>
       <b-modal-body>
         <p>Tags: {{ meldung.tags }}</p>
-        <p>Zeitpunkt: {{ meldung.timestamp }}</p>
+        <p>Zeitpunkt: {{ new Date(meldung.timestamp).format("h:MM dd, mmmm") }}</p>
         <p>{{ meldung.beschreibung }}</p>
       </b-modal-body>
       <b-modal-footer>
@@ -152,6 +153,17 @@
           Schließen
         </b-button>
       </b-modal-footer>
+    </b-modal>
+
+
+    <b-modal id="mannschaft-modal">
+      <b-modal-header>
+        <h4>Mannschaft/Resource</h4>
+      </b-modal-header>
+      <b-modal-body>
+        <p>Bezeichnung: {{ shownSuchtrupp.leiter }}</p>
+        <p>Anzahl Personen: {{shownSuchtrupp.anzahlPersons}}</p>
+      </b-modal-body>
     </b-modal>
 
     <b-modal ok-disabled id="add-meldung-modal">
@@ -206,6 +218,7 @@ export default {
       newMeldung: {},
       newGroup: { leader: "", persons: 0 },
       meldung: {},
+      shownSuchtrupp: {},
     };
   },
   computed: {
@@ -272,6 +285,10 @@ export default {
       this.$bvModal.show("add-meldung-modal");
       this.newMeldung.suchtrupp = suchtrupp.id;
     },
+    openSuchtruppModal(suchtrupp) {
+      this.$bvModal.show("mannschaft-modal");
+      this.shownSuchtrupp = suchtrupp;
+    },
     async postNewMessage() {
       let messageBody = {
         tags: this.newMeldung.tags,
@@ -332,6 +349,10 @@ export default {
   & > * {
     border: solid 2px black;
   }
+}
+
+.suchtrupp-name {
+  cursor: pointer;
 }
 
 .suchtrupp-meldung-add-button {
