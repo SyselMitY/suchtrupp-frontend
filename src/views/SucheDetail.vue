@@ -30,23 +30,31 @@
         </div>
       </b-jumbotron> -->
 
-<b-form-group label="Anfangszeit" label-for="anfangszeit">
-          <b-form-input
-            id="anfangszeit"
-            v-model="anfangszeit"
-            type="datetime-local"
-          ></b-form-input>
-        </b-form-group>
-<b-form-group label="Endzeit" label-for="endzeit">
-          <b-form-input
-            id="endzeit"
-            v-model="endzeit"
-            type="datetime-local"
-          ></b-form-input>
-        </b-form-group>
+      <b-form-group label="Anfangszeit" label-for="anfangszeit">
+        <b-form-input
+          id="anfangszeit"
+          v-model="anfangszeit"
+          type="datetime-local"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group label="Endzeit" label-for="endzeit">
+        <b-form-input
+          id="endzeit"
+          v-model="endzeit"
+          type="datetime-local"
+        ></b-form-input>
+      </b-form-group>
 
-        <b-button @click="clearAnfangAndEndzeit()" variant="success">Bereich zurücksetzen</b-button>
-        
+      <b-button @click="clearAnfangAndEndzeit()" variant="success"
+        >Bereich zurücksetzen</b-button
+      >
+      <b-button @click="setLastHour()" variant="success"
+        >Letzte Stunde</b-button
+      >
+      <b-button @click="setPreviousHour()" variant="success"
+        >Stunde zurück</b-button>
+      <b-button @click="setNextHour()" variant="success"
+        >Stunde vor</b-button>
 
       <div
         class="suchtrupp-container"
@@ -276,6 +284,18 @@ export default {
     this.suche = suche;
   },
   methods: {
+    setLastHour() {
+      this.endzeit = undefined;
+      this.anfangszeit = this.latestTimestamp - 3600000;
+    },
+    setPreviousHour() {
+      this.endzeit = this.anfangszeit;
+      this.anfangszeit = this.anfangszeit - 3600000;
+    },
+    setNextHour() {
+      this.anfangszeit = this.endzeit;
+      this.endzeit = this.endzeit + 3600000;
+    },
     getTimestampLocation(timestamp) {
       return (
         (timestamp - this.earliestTimestamp) /
