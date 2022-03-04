@@ -42,7 +42,7 @@
             :key="'d' + index"
             :style="`left: ${timeDivision.fraction * 90}%`"
           >
-            {{ timeDivision.timestamp.toLocaleTimeString()}}</span
+            {{ new Date(timeDivision.timestamp).toLocaleTimeString() }}</span
           >
         </div>
         <div
@@ -52,9 +52,7 @@
           :style="`grid-column: 1; grid-row: ${index + 2};`"
           @click="openSuchtruppModal(suchtrupp)"
         >
-          <h4>
-            {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersonen }}]
-          </h4>
+          <h4>{{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersonen }}]</h4>
         </div>
 
         <div
@@ -138,53 +136,46 @@
     </b-jumbotron>
 
     <b-modal id="meldung-modal">
-        <p>Tags: {{ meldung.tags }}</p>
-        <p>Zeitpunkt: {{ meldung.timestamp.toLocaleTimeString() }}</p>
-        <p>{{ meldung.beschreibung }}</p>
+      <p>Tags: {{ meldung.tags }}</p>
+      <p>Zeitpunkt: {{ new Date(meldung.timestamp).toLocaleTimeString() }}</p>
+      <p>{{ meldung.beschreibung }}</p>
     </b-modal>
 
-
     <b-modal id="mannschaft-modal">
-      <b-modal-header>
-        <h4>Mannschaft/Resource</h4>
-      </b-modal-header>
-      <b-modal-body>
-        <p>Bezeichnung: {{ shownSuchtrupp.leiter }}</p>
-        <p>Anzahl Personen: {{shownSuchtrupp.anzahlPersonen}}</p>
-      </b-modal-body>
+      <h4>Mannschaft/Resource</h4>
+
+      <p>Bezeichnung: {{ shownSuchtrupp.leiter }}</p>
+      <p>Anzahl Personen: {{ shownSuchtrupp.anzahlPersonen }}</p>
     </b-modal>
 
     <b-modal ok-disabled id="add-meldung-modal">
-      <b-modal-header>
-        <h4>Meldung hinzufügen</h4>
-      </b-modal-header>
-      <b-modal-body>
-        <b-form @submit.prevent="postNewMessage()">
-          <b-form-group label="Mannschaft/Ressource" label-for="formsuchtrupp">
-            <b-form-select
-              v-model="newMeldung.suchtrupp"
-              :options="suchtruppsWithId"
-              id="formsuchtrupp"
-              required
-            />
-          </b-form-group>
-          <b-form-group label="Schlagwort" label-for="formtags">
-            <b-form-input
-              required
-              id="formtags"
-              v-model="newMeldung.tags"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group label="Beschreibung" label-for="formdesc">
-            <b-form-input
-              id="formdesc"
-              v-model="newMeldung.description"
-              required
-            ></b-form-input>
-          </b-form-group>
-          <b-button type="submit" variant="success">Absenden</b-button>
-        </b-form>
-      </b-modal-body>
+      <h4>Meldung hinzufügen</h4>
+
+      <b-form @submit.prevent="postNewMessage()">
+        <b-form-group label="Mannschaft/Ressource" label-for="formsuchtrupp">
+          <b-form-select
+            v-model="newMeldung.suchtrupp"
+            :options="suchtruppsWithId"
+            id="formsuchtrupp"
+            required
+          />
+        </b-form-group>
+        <b-form-group label="Schlagwort" label-for="formtags">
+          <b-form-input
+            required
+            id="formtags"
+            v-model="newMeldung.tags"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group label="Beschreibung" label-for="formdesc">
+          <b-form-input
+            id="formdesc"
+            v-model="newMeldung.description"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="success">Absenden</b-button>
+      </b-form>
     </b-modal>
   </div>
 </template>
@@ -209,7 +200,7 @@ export default {
         description: "",
       },
       newGroup: { leader: "", persons: 0 },
-      meldung: {timestamp: new Date(), tags: "", description: ""},
+      meldung: { timestamp: new Date(), tags: "", description: "" },
       shownSuchtrupp: {},
     };
   },
