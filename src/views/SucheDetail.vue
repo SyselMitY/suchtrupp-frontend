@@ -261,7 +261,7 @@ export default {
   },
   async mounted() {
     let response = await fetch(
-      "http://" + window.location.hostname + ":8080/suche?id=" + this.id
+      "http://" + window.location.hostname + "/api/suche?id=" + this.id
     );
     let suche = await response.json();
     suche.suchtruppList.forEach(
@@ -297,7 +297,7 @@ export default {
       await fetch(
         "http://" +
           window.location.hostname +
-          ":8080/meldungen/" +
+          "/api/meldungen/" +
           this.newMeldung.suchtrupp,
         {
           method: "POST",
@@ -320,7 +320,7 @@ export default {
       await fetch(
         "http://" +
           window.location.hostname +
-          ":8080/suchtrupps/" +
+          "/api/suchtrupps/" +
           this.suche.id,
         {
           method: "POST",

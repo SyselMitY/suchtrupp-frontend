@@ -27,7 +27,7 @@ export default {
     }
   },
   async mounted() {
-    let response = await fetch("http://" + window.location.hostname + ":8080/suchen")
+    let response = await fetch("http://" + window.location.hostname + "/api/suchen")
     this.suchen = await response.json();
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
         name: this.newSearch.name,
         bereich: this.newSearch.area
       }
-      await fetch("http://" + window.location.hostname + ":8080/suchen", {
+      await fetch("http://" + window.location.hostname + "/api/suchen", {
         method: "POST",
         mode: "cors",
         headers: {
