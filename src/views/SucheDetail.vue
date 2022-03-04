@@ -30,6 +30,24 @@
         </div>
       </b-jumbotron> -->
 
+<b-form-group label="Anfangszeit" label-for="anfangszeit">
+          <b-form-input
+            id="anfangszeit"
+            v-model="anfangszeit"
+            type="datetime-local"
+          ></b-form-input>
+        </b-form-group>
+<b-form-group label="Endzeit" label-for="endzeit">
+          <b-form-input
+            id="endzeit"
+            v-model="endzeit"
+            type="datetime-local"
+          ></b-form-input>
+        </b-form-group>
+
+        <b-button @click="clearAnfangAndEndzeit()" variant="success">Bereich zurücksetzen</b-button>
+        
+
       <div
         class="suchtrupp-container"
         :style="`grid-template-rows: repeat(${
@@ -202,6 +220,8 @@ export default {
       newGroup: { leader: "", persons: 0 },
       meldung: { timestamp: new Date(), tags: "", description: "" },
       shownSuchtrupp: {},
+      anfangszeit: undefined,
+      endzeit: undefined,
     };
   },
   computed: {
@@ -225,16 +245,18 @@ export default {
       });
     },
     latestTimestamp() {
-      return new Date(
+      let calculated = new Date(
         this.allMeldungen.map((meldung) => meldung.timestamp).sort()[
           this.allMeldungen.length - 1
         ]
       ).getTime();
+      return this.endzeit || calculated;
     },
     earliestTimestamp() {
-      return new Date(
+      let calculated = new Date(
         this.allMeldungen.map((meldung) => meldung.timestamp).sort()[0]
       ).getTime();
+      return this.anfangszeit || calculated;
     },
     allMeldungen() {
       return this.suche.suchtruppList
@@ -259,6 +281,10 @@ export default {
         (timestamp - this.earliestTimestamp) /
         (this.latestTimestamp - this.earliestTimestamp)
       );
+    },
+    clearAnfangAndEndzeit() {
+      this.anfangszeit = undefined;
+      this.endzeit = undefined;
     },
     openMeldungModal(meldung) {
       this.meldung = meldung;
