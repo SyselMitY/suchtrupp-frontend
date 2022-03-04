@@ -250,13 +250,13 @@ export default {
           this.allMeldungen.length - 1
         ]
       ).getTime();
-      return this.endzeit || calculated;
+      return new Date(this.endzeit).getTime() || calculated;
     },
     earliestTimestamp() {
       let calculated = new Date(
         this.allMeldungen.map((meldung) => meldung.timestamp).sort()[0]
       ).getTime();
-      return this.anfangszeit || calculated;
+      return new Date(this.anfangszeit).getTime() || calculated;
     },
     allMeldungen() {
       return this.suche.suchtruppList
