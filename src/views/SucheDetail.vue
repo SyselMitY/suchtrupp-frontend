@@ -60,7 +60,7 @@
         class="suchtrupp-container"
         :style="`grid-template-rows: repeat(${
           suche.suchtruppList.length + 1
-        },6rem)`"
+        },7rem)`"
       >
         <div class="time-divisions">
           <span
@@ -407,8 +407,8 @@ export default {
 
 .such-meldung {
   position: absolute;
-  width: 4rem;
-  height: 2rem;
+  width: 8rem;
+  height: 6rem;
   border-radius: 3px;
   background-color: #ddd;
   border: solid 1px black;
