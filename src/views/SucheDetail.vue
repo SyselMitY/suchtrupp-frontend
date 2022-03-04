@@ -42,9 +42,7 @@
             :key="'d' + index"
             :style="`left: ${timeDivision.fraction * 90}%`"
           >
-            {{ timeDivision.timestamp.getHours() }}:{{
-              timeDivision.timestamp.getMinutes()
-            }}</span
+            {{ timeDivision.timestamp.toLocaleTimeString()}}</span
           >
         </div>
         <div
@@ -55,7 +53,7 @@
           @click="openSuchtruppModal(suchtrupp)"
         >
           <h4>
-            Suchtrupp {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersons }}]
+            Suchtrupp {{ suchtrupp.leiter }} [{{ suchtrupp.anzahlPersonen }}]
           </h4>
         </div>
 
@@ -145,7 +143,7 @@
       </b-modal-header>
       <b-modal-body>
         <p>Tags: {{ meldung.tags }}</p>
-        <p>Zeitpunkt: {{ meldung.timestamp }}</p>
+        <p>Zeitpunkt: {{ meldung.timestamp.toLocaleTimeString() }}</p>
         <p>{{ meldung.beschreibung }}</p>
       </b-modal-body>
       <b-modal-footer>
@@ -162,7 +160,7 @@
       </b-modal-header>
       <b-modal-body>
         <p>Bezeichnung: {{ shownSuchtrupp.leiter }}</p>
-        <p>Anzahl Personen: {{shownSuchtrupp.anzahlPersons}}</p>
+        <p>Anzahl Personen: {{shownSuchtrupp.anzahlPersonen}}</p>
       </b-modal-body>
     </b-modal>
 
