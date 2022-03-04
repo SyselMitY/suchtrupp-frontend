@@ -286,15 +286,15 @@ export default {
   methods: {
     setLastHour() {
       this.endzeit = undefined;
-      this.anfangszeit = this.latestTimestamp - 3600000;
+      this.anfangszeit = new Date(this.latestTimestamp - 3600000).toISOString();
     },
     setPreviousHour() {
-      this.endzeit = this.anfangszeit;
-      this.anfangszeit = this.anfangszeit - 3600000;
+      this.endzeit = new Date(this.anfangszeit).toISOString();
+      this.anfangszeit = new Date(this.anfangszeit - 3600000).toISOString();
     },
     setNextHour() {
-      this.anfangszeit = this.endzeit;
-      this.endzeit = this.endzeit + 3600000;
+      this.anfangszeit = new Date(this.endzeit).toISOString();
+      this.endzeit = new Date(this.endzeit + 3600000).toISOString();
     },
     getTimestampLocation(timestamp) {
       return (
