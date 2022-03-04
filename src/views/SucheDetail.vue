@@ -145,7 +145,7 @@
       </b-modal-header>
       <b-modal-body>
         <p>Tags: {{ meldung.tags }}</p>
-        <p>Zeitpunkt: {{ new Date(meldung.timestamp).format("h:MM dd, mmmm") }}</p>
+        <p>Zeitpunkt: {{ meldung.timestamp }}</p>
         <p>{{ meldung.beschreibung }}</p>
       </b-modal-body>
       <b-modal-footer>
