@@ -213,7 +213,11 @@ export default {
   data() {
     return {
       suche: undefined,
-      newMeldung: {},
+      newMeldung: {
+        suchtrupp: undefined,
+        tags: "",
+        description: "",
+      },
       newGroup: { leader: "", persons: 0 },
       meldung: {timestamp: new Date(), tags: "", description: ""},
       shownSuchtrupp: {},
@@ -280,8 +284,8 @@ export default {
       this.meldung = meldung;
     },
     openAddMeldungModal(suchtrupp) {
-      this.$bvModal.show("add-meldung-modal");
       this.newMeldung.suchtrupp = suchtrupp.id;
+      this.$bvModal.show("add-meldung-modal");
     },
     openSuchtruppModal(suchtrupp) {
       this.$bvModal.show("mannschaft-modal");
