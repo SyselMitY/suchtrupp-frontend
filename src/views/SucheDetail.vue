@@ -121,10 +121,10 @@
 
     <b-jumbotron
       header-level="4"
-      header="Neuer Suchtrupp"
-      lead="Neuen Suchtrupp erstellen"
+      header="Neue Mannschaft/Ressource"
+      lead="Neue Mannschaft/Ressource erstellen"
     >
-      <b-form-group label="Leiter" label-for="formleiter">
+      <b-form-group label="Bezeichnung" label-for="formleiter">
         <b-form-input id="formleiter" v-model="newGroup.leader"></b-form-input>
       </b-form-group>
       <b-form-group label="Anzahl Personen" label-for="formpersons">
@@ -215,7 +215,7 @@ export default {
       suche: undefined,
       newMeldung: {},
       newGroup: { leader: "", persons: 0 },
-      meldung: {},
+      meldung: {timestamp: new Date(), tags: "", description: ""},
       shownSuchtrupp: {},
     };
   },
